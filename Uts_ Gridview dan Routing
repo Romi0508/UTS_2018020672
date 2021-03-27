@@ -1,0 +1,186 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+       routes: {
+        "/Beranda": (BuildContext context) => new Home(),
+        "/Berbintang": (BuildContext context) => new Star(),
+        "/Dibagikan": (BuildContext context) => new People(),
+        "/File": (BuildContext context) => new Folder(),
+      },
+      home: Scaffold(
+        backgroundColor: Colors.green,
+        appBar: AppBar(
+          title: Text('MENU UTAMA UTS (6SIA11)'),
+        ),
+        //body
+        body: GridView.count(
+          crossAxisCount: 2,
+          children: <Widget>[
+            MyMenu(judul: "Beranda", icon: Icons.home ),
+            MyMenu(judul: "Berbintang", icon: Icons.star ),
+            MyMenu(judul: "Dibagikan", icon: Icons.people),
+            MyMenu(judul: "File", icon: Icons.folder),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MyMenu extends StatelessWidget {
+  //Atribut
+  final String judul;
+  final IconData icon;
+ 
+  //constructor
+  MyMenu({this.judul, this.icon});
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.all(8.0),
+      child: InkResponse(
+        onTap: () { 
+          Navigator.pushNamed(context, "/$judul");
+        },
+        splashColor: Colors.greenAccent,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(icon, size:70.0),
+              Text(judul, style: new TextStyle(fontSize: 17.0))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+class Home extends StatelessWidget {
+  static const String routeName = 'home';
+  Widget build(BuildContext context){
+      return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue[500],
+         title: Text ("Data Mahasiswa "),
+      ),
+      body: Center(
+        child: ListView(
+            children: <Widget>[
+          new ListTile(
+            title: const Text('Romi'),
+            subtitle: const Text('Nama Mahasiswa'),
+          ),
+          new ListTile(
+            title: const Text('6SIA11'),
+            subtitle: const Text('Kelas'),
+          ),
+          new ListTile(
+            title: const Text('2018020672'),
+            subtitle: const Text('Nirm'),
+          ),
+          new ListTile(
+            title: const Text('Sistem Informasi'),
+            subtitle: const Text('Jurusan'),
+          ),
+          new ListTile(
+            title: const Text('STMIK TRIGUNA DHARMA MEDAN'),
+            subtitle: const Text('Kampus'),
+          ),
+              RaisedButton(
+                child: Text ('Kembali'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+             ],
+           ),
+        ),
+      );
+  }
+}
+class Star extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.pink,
+        title: Text( " ROMI_2018020672 " ),
+        ),
+     body: Center(
+        child: ListView(
+            children: <Widget>[ 
+               Icon(Icons.star, size: 75.0),
+               new ListTile(
+                  title: const Text("Anda tidak memiliki file yang dibintangi"),
+                 ),
+            RaisedButton(
+                child: Text ('Kembali'),
+                onPressed: () {
+                  Navigator.pop(context);
+               },
+              )
+             ],
+          ),
+        ),
+      );
+  }
+}
+ 
+class People extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.deepOrange,
+      appBar: AppBar(
+        backgroundColor: Colors.yellow,
+        title: Text( " ROMI_2018020672 " ),
+        ),
+     body: Center(
+        child: ListView(
+            children: <Widget>[ 
+               Icon(Icons.people, size: 75.0),
+               new ListTile(
+                  title: const Text("From Dibagikan Kosong"),
+                 ),
+            RaisedButton(
+                child: Text ('Kembali'),
+                onPressed: () {
+                  Navigator.pop(context);
+               },
+              )
+             ],
+          ),
+        ),
+      );
+  }
+}
+ 
+class Folder extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Text( " ROMI_2018020672 " ),
+        ),
+     body: Center(
+        child: ListView(
+            children: <Widget>[ 
+               Icon(Icons.folder, size: 75.0),
+               new ListTile(
+                  title: const Text("File Kosong"),
+                 ),
+            RaisedButton(
+                child: Text ('Kembali'),
+                onPressed: () {
+                  Navigator.pop(context);
+               },
+              )
+             ],
+          ),
+        ),
+      );
+  }
+}
